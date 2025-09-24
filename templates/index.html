@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post" action="{{ url_for('character.generate') }}">
+  <fieldset>
+    <legend>1) Escolha o estilo de geração</legend>
+    <label><input type="radio" name="estilo" value="classico" checked> Clássico </label><br>
+    <label><input type="radio" name="estilo" value="heroico"> Heróico </label><br>
+    <label><input type="radio" name="estilo" value="aventureiro"> Aventureiro </label>
+  </fieldset>
+
+  <fieldset>
+    <legend>2) Escolha a raça</legend>
+    <select name="raca">
+      {% for k,n in races %}
+        <option value="{{k}}">{{n}}</option>
+      {% endfor %}
+    </select>
+  </fieldset>
+
+  <fieldset>
+    <legend>3) Escolha a classe</legend>
+    <select name="classe">
+      {% for k,n in classes %}
+        <option value="{{k}}">{{n}}</option>
+      {% endfor %}
+    </select>
+  </fieldset>
+
+  <button type="submit">Gerar Personagem</button>
+</form>
+{% endblock %}

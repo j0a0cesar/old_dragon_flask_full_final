@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Ficha do Personagem</h2>
+  <p><strong>Estilo:</strong> {{ personagem.estilo }}</p>
+  <p><strong>Raça:</strong> {{ personagem.raca.__class__.__name__ }}</p>
+  <p><strong>Classe:</strong> {{ personagem.classe.__class__.__name__ }}</p>
+
+  <h3>Atributos</h3>
+  <ul>
+    {% for nome in ['forca','destreza','constituicao','inteligencia','sabedoria','carisma'] %}
+      <li>{{ nome.capitalize() }}: {{ atributos[nome] }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Habilidades da Raça</h3>
+  <ul>
+    {% for h in personagem.raca.habilidades_raca %}
+      <li>{{ h }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Habilidades da Classe (nível 1)</h3>
+  <ul>
+    {% for h in personagem.classe.habilidades_classe.get(1, []) %}
+      <li>{{ h }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Restrições / Observações da Classe</h3>
+  <p>Armadura: {{ personagem.classe.armadura }}</p>
+  <p>Armas: {{ personagem.classe.armas }}</p>
+  <p>Itens mágicos: {{ personagem.classe.itens_magicos }}</p>
+
+  <a href="{{ url_for('character.index') }}">Criar outro personagem</a>
+{% endblock %}

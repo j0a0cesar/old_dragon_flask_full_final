@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Distribua os valores rolados</h2>
+  <p>Rolagens: {{ rolled | sort(reverse=true) }}</p>
+
+  <form method="post" action="{{ url_for('character.create') }}">
+    <input type="hidden" name="estilo" value="{{estilo}}">
+    <input type="hidden" name="raca" value="{{raca}}">
+    <input type="hidden" name="classe" value="{{classe}}">
+
+    {% for v in rolled %}
+      <input type="hidden" name="rolled_index_{{ loop.index0 }}" value="{{ v }}">
+    {% endfor %}
+
+    {% for nome in ['forca','destreza','constituicao','inteligencia','sabedoria','carisma'] %}
+      <label>{{nome.capitalize()}}:</label>
+      <select name="{{nome}}" class="assign">
+        <option value="">-- escolha --</option>
+        {% for v in rolled %}
+          <option value="{{ loop.index0 }}">{{ v }}</option>
+        {% endfor %}
+      </select>
+      <br>
+    {% endfor %}
+
+    <button type="submit">Confirmar distribuição</button>
+  </form>
+
+
+{% endblock %}

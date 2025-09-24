@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Old Dragon - Criador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+  </head>
+  <body>
+    <div class="site-head">
+      <header>
+        <div class="container">
+          <h1>Old Dragon - Criador de Personagens</h1>
+        </div>
+      </header>
+    </div>
+
+    <main>
+      <div class="container">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for msg in messages %}
+                <li>{{ msg }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <div class="card">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+    </main>
+
+    <div class="site-foot">
+      <footer>
+        <div class="container">
+          <span>© 2025 - Projeto Old Dragon</span>
+        </div>
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+  </body>
+</html>
